@@ -110,6 +110,8 @@ class DockerfileGenerator:
         
         versions = cfg.get('versions', {})
         gcc_ver = versions.get('gcc', '14')
+        # Debian apt package names use major version only (e.g., gcc-14, not gcc-14.2)
+        gcc_pkg_ver = gcc_ver.split('.')[0]
         cpu = cfg.get('cpu', 'generic')
         
         # CFLAGS for CPU optimization
@@ -160,8 +162,8 @@ class DockerfileGenerator:
         
         # Add toolchain packages
         all_pkgs.extend([
-            f'gcc-{gcc_ver}-aarch64-linux-gnu',
-            f'g++-{gcc_ver}-aarch64-linux-gnu',
+            f'gcc-{gcc_pkg_ver}-aarch64-linux-gnu',
+            f'g++-{gcc_pkg_ver}-aarch64-linux-gnu',
             'libc6-dev-arm64-cross',
             'binutils-aarch64-linux-gnu',
             'gdb-multiarch',
@@ -183,8 +185,8 @@ class DockerfileGenerator:
         lines.extend([
             "",
             "# Create gcc/g++ symlinks",
-            f"RUN ln -sf /usr/bin/aarch64-linux-gnu-gcc-{gcc_ver} /usr/bin/aarch64-linux-gnu-gcc && \\",
-            f"    ln -sf /usr/bin/aarch64-linux-gnu-g++-{gcc_ver} /usr/bin/aarch64-linux-gnu-g++",
+            f"RUN ln -sf /usr/bin/aarch64-linux-gnu-gcc-{gcc_pkg_ver} /usr/bin/aarch64-linux-gnu-gcc && \\",
+            f"    ln -sf /usr/bin/aarch64-linux-gnu-g++-{gcc_pkg_ver} /usr/bin/aarch64-linux-gnu-g++",
         ])
         
         # Verification
