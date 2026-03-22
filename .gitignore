@@ -1,0 +1,37 @@
+# 编译生成的文件
+*.o
+*.a
+*.so
+*.elf
+*.bin
+*.img
+
+# 下载的工具链（可通过脚本重新下载）
+toolchains/
+downloads/
+
+# 构建输出
+build/
+out/
+dist/
+
+# Docker相关
+docker-build/
+.cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 临时文件
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# 环境变量文件（可能包含敏感信息）
+.env
+.env.local
