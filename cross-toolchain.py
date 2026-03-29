@@ -200,6 +200,7 @@ class DockerfileGenerator:
             "    ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/;s/armv7l/arm/') && \\",
             "    curl -fsSL https://github.com/boxboat/fixuid/releases/download/v0.6.0/fixuid-0.6.0-linux-${ARCH}.tar.gz | tar -C /usr/local/bin -xzf - && \\",
             "    chmod 4755 /usr/local/bin/fixuid && \\",
+            "    mkdir -p /workspace && \\",
             "    chown -R developer:developer /workspace /home/developer",
         ])
         
